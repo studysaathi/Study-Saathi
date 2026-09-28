@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Study Saathi - Learn Smart</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,"Noto Sans Devanagari",sans-serif;background:#f5f7fb;color:#172033}
+.app{max-width:520px;margin:auto;min-height:100vh;background:#fff}
+.hero{padding:24px 20px;background:linear-gradient(135deg,#4f46e5,#7c3aed);color:white;border-radius:0 0 28px 28px}
+.logo{font-size:28px;font-weight:800}.tag{opacity:.9;margin-top:6px}
+.search{margin-top:18px;background:white;color:#777;border:0;border-radius:14px;padding:14px;width:100%;font-size:15px}
+.section{padding:20px}.title{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.title h2{font-size:20px;margin:0}.muted{color:#687386;font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.card{border:1px solid #e7eaf0;border-radius:18px;padding:16px;background:white;box-shadow:0 4px 14px #00000008}
+.icon{font-size:28px}.card h3{margin:9px 0 5px;font-size:16px}.card p{margin:0;color:#687386;font-size:12px;line-height:1.4}
+.banner{margin-top:15px;padding:18px;border-radius:18px;background:#eef2ff}
+.banner h3{margin:0 0 7px}.banner p{margin:0;color:#5b6475;font-size:13px}
+.subjects{display:flex;gap:9px;overflow:auto;padding-bottom:4px}
+.chip{white-space:nowrap;background:#f1f3f9;padding:10px 13px;border-radius:20px;font-size:13px}
+button{border:0;cursor:pointer}.primary{margin-top:12px;background:#4f46e5;color:white;padding:11px 15px;border-radius:12px}
+.nav{position:sticky;bottom:0;background:white;border-top:1px solid #e8eaf0;display:grid;grid-template-columns:repeat(5,1fr);padding:9px 4px 8px}
+.nav button{background:white;color:#667085;font-size:11px;padding:5px}.nav span{display:block;font-size:20px;margin-bottom:3px}
+#content{min-height:300px}
+.hide{display:none}
+</style>
+</head>
+<body>
+<div class="app">
+<div id="content">
+<section class="hero">
+<div class="logo">📚 Study Saathi</div>
+<div class="tag">हर विद्यार्थी की पढ़ाई का साथी</div>
+<input class="search" id="search" placeholder="🔎 विषय, chapter या सवाल खोजें..." oninput="searchCards()">
+</section>
+
+<section class="section">
+<div class="title"><h2>अपनी पढ़ाई चुनें</h2><span class="muted">Free</span></div>
+<div class="grid" id="cards">
+<div class="card" data-text="class 1 2 3 4 5 primary"><div class="icon">🎒</div><h3>Class 1–5</h3><p>बेसिक Maths, Hindi, English, EVS और अभ्यास।</p></div>
+<div class="card" data-text="class 6 7 8 middle school"><div class="icon">📘</div><h3>Class 6–8</h3><p>Science, Maths, Social Science और notes।</p></div>
+<div class="card" data-text="class 9 10 board"><div class="icon">🏆</div><h3>Class 9–10</h3><p>Board preparation, MCQ और revision।</p></div>
+<div class="card" data-text="class 11 12 science commerce arts"><div class="icon">🎓</div><h3>Class 11–12</h3><p>Science, Commerce, Arts और exam practice।</p></div>
+<div class="card" data-text="iti polytechnic mechanical engineering"><div class="icon">🔧</div><h3>ITI & Polytechnic</h3><p>Technical subjects, practical और viva तैयारी।</p></div>
+<div class="card" data-text="competitive exam government job"><div class="icon">📝</div><h3>Competitive Exams</h3><p>GK, Reasoning, Maths और mock tests।</p></div>
+</div>
+
+<div class="banner">
+<h3>🤖 AI Tutor</h3>
+<p>सवाल लिखकर आसान भाषा में समझने के लिए AI Tutor का इस्तेमाल करें।</p>
+<button class="primary" onclick="showTutor()">AI Tutor खोलें</button>
+</div>
+</section>
+
+<section class="section">
+<div class="title"><h2>आज की पढ़ाई</h2><span class="muted">Start</span></div>
+<div class="subjects">
+<div class="chip">📐 Maths</div><div class="chip">🔬 Science</div><div class="chip">📖 English</div><div class="chip">🌍 GK</div><div class="chip">⚙️ Engineering</div>
+</div>
+</section>
+</div>
+
+<div class="nav">
+<button onclick="home()"><span>🏠</span>Home</button>
+<button onclick="alert('Classes: Class 1–12, ITI और Polytechnic जल्द chapter-wise उपलब्ध होंगे।')"><span>▦</span>Classes</button>
+<button onclick="alert('Daily Tests जल्द उपलब्ध होंगे।')"><span>✓</span>Tests</button>
+<button onclick="showTutor()"><span>✦</span>AI Tutor</button>
+<button onclick="alert('Student Profile और progress feature जल्द उपलब्ध होगा।')"><span>●</span>Profile</button>
+</div>
+</div>
+
+<script>
+function searchCards(){
+ const q=document.getElementById('search').value.toLowerCase().trim();
+ document.querySelectorAll('.card').forEach(c=>{
+   c.style.display=(!q || c.dataset.text.toLowerCase().includes(q))?'block':'none';
+ });
+}
+function showTutor(){
+ document.getElementById('content').innerHTML=
+ '<section class="hero"><div class="logo">🤖 AI Tutor</div><div class="tag">अपना सवाल आसान भाषा में पूछें</div></section>'+
+ '<section class="section"><div class="card"><h3>AI Tutor</h3><p>यह अभी demo version है। आगे इसमें असली AI question-answer सुविधा जोड़ी जाएगी।</p><button class="primary" onclick="home()">← Home पर जाएँ</button></div></section>';
+ window.scrollTo(0,0);
+}
+function home(){location.reload();}
+</script>
+</body>
+</html>
