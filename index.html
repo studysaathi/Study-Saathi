@@ -5,47 +5,392 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Study Saathi</title>
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,"Noto Sans Devanagari",sans-serif;background:#f5f7fb;color:#172033}
-.app{max-width:520px;margin:auto;min-height:100vh;background:#fff}.hero{padding:24px 20px;background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;border-radius:0 0 28px 28px}.logo{font-size:28px;font-weight:800}.tag{margin-top:6px;opacity:.9}
-.search{margin-top:18px;background:#fff;color:#777;border:0;border-radius:14px;padding:14px;width:100%;font-size:15px}.section{padding:20px}.title{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.title h2{font-size:20px;margin:0}.muted{color:#687386;font-size:13px}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.card{border:1px solid #e7eaf0;border-radius:18px;padding:16px;background:#fff;box-shadow:0 4px 14px #00000008}.click{cursor:pointer}.click:active{transform:scale(.98)}
-.icon{font-size:28px}.card h3{margin:9px 0 5px;font-size:16px}.card p{margin:0;color:#687386;font-size:12px;line-height:1.4}.banner{margin-top:15px;padding:18px;border-radius:18px;background:#eef2ff}.banner h3{margin:0 0 7px}.banner p{margin:0;color:#5b6475;font-size:13px}
-button{border:0;cursor:pointer}.primary{margin-top:12px;background:#4f46e5;color:white;padding:11px 15px;border-radius:12px}.back{background:#eef2ff;color:#4f46e5}.nav{position:sticky;bottom:0;background:white;border-top:1px solid #e8eaf0;display:grid;grid-template-columns:repeat(5,1fr);padding:9px 4px 8px}.nav button{background:white;color:#667085;font-size:11px;padding:5px}.nav span{display:block;font-size:20px;margin-bottom:3px}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,"Noto Sans Devanagari",sans-serif;background:#f5f7fb;color:#172033}
+.app{max-width:520px;margin:auto;min-height:100vh;background:#fff}
+.hero{padding:24px 20px;background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;border-radius:0 0 28px 28px}
+.logo{font-size:28px;font-weight:800}
+.tag{margin-top:6px;opacity:.9}
+.search{margin-top:18px;background:#fff;color:#777;border:0;border-radius:14px;padding:14px;width:100%;font-size:15px}
+.section{padding:20px}
+.title{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.title h2{font-size:20px;margin:0}
+.muted{color:#687386;font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.card{border:1px solid #e7eaf0;border-radius:18px;padding:16px;background:#fff;box-shadow:0 4px 14px #00000008}
+.click{cursor:pointer}
+.click:active{transform:scale(.98)}
+.icon{font-size:28px}
+.card h3{margin:9px 0 5px;font-size:16px}
+.card p{margin:0;color:#687386;font-size:12px;line-height:1.4}
+.banner{margin-top:15px;padding:18px;border-radius:18px;background:#eef2ff}
+.banner h3{margin:0 0 7px}
+.banner p{margin:0;color:#5b6475;font-size:13px}
+button{border:0;cursor:pointer}
+.primary{margin-top:12px;background:#4f46e5;color:white;padding:11px 15px;border-radius:12px}
+.back{background:#eef2ff;color:#4f46e5}
+.nav{position:sticky;bottom:0;background:white;border-top:1px solid #e8eaf0;display:grid;grid-template-columns:repeat(5,1fr);padding:9px 4px 8px}
+.nav button{background:white;color:#667085;font-size:11px;padding:5px}
+.nav span{display:block;font-size:20px;margin-bottom:3px}
 </style>
 </head>
+
 <body>
-<div class="app"><div id="content"></div>
+
+<div class="app">
+<div id="content"></div>
+
 <div class="nav">
-<button onclick="home()"><span>🏠</span>Home</button><button onclick="classes()"><span>▦</span>Classes</button><button onclick="tests()"><span>✓</span>Tests</button><button onclick="tutor()"><span>✦</span>AI Tutor</button><button onclick="profile()"><span>●</span>Profile</button>
-</div></div>
+<button onclick="home()"><span>🏠</span>Home</button>
+<button onclick="classes()"><span>▦</span>Classes</button>
+<button onclick="tests()"><span>✓</span>Tests</button>
+<button onclick="tutor()"><span>✦</span>AI Tutor</button>
+<button onclick="profile()"><span>●</span>Profile</button>
+</div>
+</div>
+
 <script>
-function home(){content.innerHTML=`<section class="hero"><div class="logo">📚 Study Saathi</div><div class="tag">हर विद्यार्थी की पढ़ाई का साथी</div><input class="search" placeholder="🔎 विषय, chapter या सवाल खोजें..." oninput="searchCards()"></section>
-<section class="section"><div class="title"><h2>अपनी पढ़ाई चुनें</h2><span class="muted">Free</span></div><div class="grid" id="cards">
-<div class="card click" data-text="class 1 2 3 4 5" onclick="primaryClasses()"><div class="icon">🎒</div><h3>Class 1–5</h3><p>बेसिक subjects और अभ्यास</p></div>
-<div class="card click" data-text="class 6 7 8" onclick="section('Class 6–8','📘','Maths • Science • Social Science')"><div class="icon">📘</div><h3>Class 6–8</h3><p>Notes और practice</p></div>
-<div class="card click" data-text="class 9 10 board" onclick="section('Class 9–10','🏆','Board • MCQ • Revision • PYQ')"><div class="icon">🏆</div><h3>Class 9–10</h3><p>Board preparation</p></div>
-<div class="card click" data-text="class 11 12 science commerce arts" onclick="section('Class 11–12','🎓','Science • Commerce • Arts')"><div class="icon">🎓</div><h3>Class 11–12</h3><p>Exam practice</p></div>
-<div class="card click" data-text="iti polytechnic engineering" onclick="section('ITI & Polytechnic','🔧','Technical subjects • Practical • Viva')"><div class="icon">🔧</div><h3>ITI & Polytechnic</h3><p>Technical preparation</p></div>
-<div class="card click" data-text="competitive exam government job" onclick="section('Competitive Exams','📝','GK • Reasoning • Maths • Mock Test')"><div class="icon">📝</div><h3>Competitive Exams</h3><p>Exam practice</p></div></div>
-<div class="banner"><h3>🤖 AI Tutor</h3><p>सवाल पूछकर आसान भाषा में समझें।</p><button class="primary" onclick="tutor()">AI Tutor खोलें</button></div></section>`}
-function searchCards(){let q=document.querySelector('.search').value.toLowerCase();document.querySelectorAll('.card').forEach(c=>c.style.display=(!q||c.dataset.text.includes(q))?'block':'none')}
-function primaryClasses(){content.innerHTML=`<section class="hero"><div class="logo">🎒 Class 1–5</div><div class="tag">अपनी कक्षा चुनें</div></section><section class="section"><div class="grid">
-<div class="card click" onclick="subjects('Class 1')"><div class="icon">1️⃣</div><h3>Class 1</h3><p>Subjects और chapters</p></div>
-<div class="card click" onclick="subjects('Class 2')"><div class="icon">2️⃣</div><h3>Class 2</h3><p>Subjects और chapters</p></div>
-<div class="card click" onclick="subjects('Class 3')"><div class="icon">3️⃣</div><h3>Class 3</h3><p>Subjects और chapters</p></div>
-<div class="card click" onclick="subjects('Class 4')"><div class="icon">4️⃣</div><h3>Class 4</h3><p>Subjects और chapters</p></div>
-<div class="card click" onclick="subjects('Class 5')"><div class="icon">5️⃣</div><h3>Class 5</h3><p>Subjects और chapters</p></div>
-</div><button class="primary back" onclick="home()">← Home</button></section>`}
-function subjects(cls){content.innerHTML=`<section class="hero"><div class="logo">📚 ${cls}</div><div class="tag">Subject चुनें</div></section><section class="section"><div class="grid">
-<div class="card click" onclick="chapters('${cls}','Maths','📐')"><div class="icon">📐</div><h3>Maths</h3><p>गणित के chapters</p></div>
-<div class="card click" onclick="chapters('${cls}','Hindi','📖')"><div class="icon">📖</div><h3>Hindi</h3><p>हिंदी के chapters</p></div>
-<div class="card click" onclick="chapters('${cls}','English','🔤')"><div class="icon">🔤</div><h3>English</h3><p>English chapters</p></div>
-<div class="card click" onclick="chapters('${cls}','EVS','🌱')"><div class="icon">🌱</div><h3>EVS</h3><p>पर्यावरण अध्ययन</p></div>
-</div><button class="primary back" onclick="primaryClasses()">← Class चुनें</button></section>`}
-function chapters(cls,sub,icon){content.innerHTML=`<section class="hero"><div class="logo">${icon} ${sub}</div><div class="tag">${cls} • Chapter list</div></section><section class="section"><div class="card"><h3>📚 Chapters</h3><p>Chapter-wise notes और practice यहाँ उपलब्ध होंगे।</p><button class="primary" onclick="alert('यह chapter अभी demo में है। अगली update में पूरा lesson, notes और MCQ जोड़े जाएंगे।')">Chapter 1 खोलें</button></div><button class="primary back" onclick="subjects('${cls}')">← Subjects</button></section>`}
-function section(title,icon,text){content.innerHTML=`<section class="hero"><div class="logo">${icon} ${title}</div><div class="tag">आपकी पढ़ाई यहाँ से शुरू होगी</div></section><section class="section"><div class="card"><h3>📚 Subjects</h3><p>${text}</p><button class="primary" onclick="alert('इस section के chapters और notes अगले version में जोड़े जाएंगे।')">Chapters खोलें</button><br><button class="primary back" onclick="home()">← Home</button></div></section>`}
-function classes(){primaryClasses()} function tests(){section('Daily Tests','✓','MCQ • Practice • Mock Tests')} function tutor(){section('AI Tutor','🤖','अपना सवाल पूछें और आसान explanation पाएँ')} function profile(){section('Student Profile','👤','Progress • Tests • Study history')}
+
+function home(){
+
+content.innerHTML=`
+
+<section class="hero">
+<div class="logo">📚 Study Saathi</div>
+<div class="tag">हर विद्यार्थी की पढ़ाई का साथी</div>
+<input class="search"
+placeholder="🔎 विषय, chapter या सवाल खोजें..."
+oninput="searchCards()">
+</section>
+
+<section class="section">
+
+<div class="title">
+<h2>Section 1–5</h2>
+<span class="muted">Free</span>
+</div>
+
+<div class="grid">
+
+<div class="card click" data-text="section 1"
+onclick="studySection('Section 1','📘','Basic Learning • Notes • Practice')">
+<div class="icon">1️⃣</div>
+<h3>Section 1</h3>
+<p>Basic Learning</p>
+</div>
+
+<div class="card click" data-text="section 2"
+onclick="studySection('Section 2','📗','Subjects • Notes • Practice')">
+<div class="icon">2️⃣</div>
+<h3>Section 2</h3>
+<p>Subjects & Notes</p>
+</div>
+
+<div class="card click" data-text="section 3"
+onclick="studySection('Section 3','📕','Chapter • Questions • Answers')">
+<div class="icon">3️⃣</div>
+<h3>Section 3</h3>
+<p>Chapter & Questions</p>
+</div>
+
+<div class="card click" data-text="section 4"
+onclick="studySection('Section 4','📙','Practice • MCQ • Revision')">
+<div class="icon">4️⃣</div>
+<h3>Section 4</h3>
+<p>Practice & Revision</p>
+</div>
+
+<div class="card click" data-text="section 5"
+onclick="studySection('Section 5','📚','Test • Mock Test • Exam Preparation')">
+<div class="icon">5️⃣</div>
+<h3>Section 5</h3>
+<p>Test & Exam</p>
+</div>
+
+</div>
+
+<div class="title" style="margin-top:25px">
+<h2>अपनी पढ़ाई चुनें</h2>
+<span class="muted">Free</span>
+</div>
+
+<div class="grid" id="cards">
+
+<div class="card click" data-text="class 1 2 3 4 5"
+onclick="primaryClasses()">
+<div class="icon">🎒</div>
+<h3>Class 1–5</h3>
+<p>बेसिक subjects और अभ्यास</p>
+</div>
+
+<div class="card click" data-text="class 6 7 8"
+onclick="section('Class 6–8','📘','Maths • Science • Social Science')">
+<div class="icon">📘</div>
+<h3>Class 6–8</h3>
+<p>Notes और practice</p>
+</div>
+
+<div class="card click" data-text="class 9 10 board"
+onclick="section('Class 9–10','🏆','Board • MCQ • Revision • PYQ')">
+<div class="icon">🏆</div>
+<h3>Class 9–10</h3>
+<p>Board preparation</p>
+</div>
+
+<div class="card click" data-text="class 11 12 science commerce arts"
+onclick="section('Class 11–12','🎓','Science • Commerce • Arts')">
+<div class="icon">🎓</div>
+<h3>Class 11–12</h3>
+<p>Exam practice</p>
+</div>
+
+<div class="card click" data-text="iti polytechnic engineering"
+onclick="section('ITI & Polytechnic','🔧','Technical subjects • Practical • Viva')">
+<div class="icon">🔧</div>
+<h3>ITI & Polytechnic</h3>
+<p>Technical preparation</p>
+</div>
+
+<div class="card click" data-text="competitive exam government job"
+onclick="section('Competitive Exams','📝','GK • Reasoning • Maths • Mock Test')">
+<div class="icon">📝</div>
+<h3>Competitive Exams</h3>
+<p>Exam practice</p>
+</div>
+
+</div>
+
+<div class="banner">
+<h3>🤖 AI Tutor</h3>
+<p>सवाल पूछकर आसान भाषा में समझें।</p>
+<button class="primary" onclick="tutor()">AI Tutor खोलें</button>
+</div>
+
+</section>`;
+}
+
+
+function searchCards(){
+let q=document.querySelector('.search').value.toLowerCase();
+
+document.querySelectorAll('.card').forEach(c=>{
+c.style.display=(!q||c.dataset.text.includes(q))?'block':'none'
+});
+}
+
+
+function studySection(title,icon,text){
+
+content.innerHTML=`
+
+<section class="hero">
+<div class="logo">${icon} ${title}</div>
+<div class="tag">Study Saathi</div>
+</section>
+
+<section class="section">
+
+<div class="card">
+<h3>📚 ${title}</h3>
+<p>${text}</p>
+
+<button class="primary"
+onclick="alert('${title} का content यहाँ जोड़ा जाएगा।')">
+Open ${title}
+</button>
+
+</div>
+
+<button class="primary back" onclick="home()">
+← Home
+</button>
+
+</section>`;
+}
+
+
+function primaryClasses(){
+
+content.innerHTML=`
+
+<section class="hero">
+<div class="logo">🎒 Class 1–5</div>
+<div class="tag">अपनी कक्षा चुनें</div>
+</section>
+
+<section class="section">
+
+<div class="grid">
+
+<div class="card click" onclick="subjects('Class 1')">
+<div class="icon">1️⃣</div>
+<h3>Class 1</h3>
+<p>Subjects और chapters</p>
+</div>
+
+<div class="card click" onclick="subjects('Class 2')">
+<div class="icon">2️⃣</div>
+<h3>Class 2</h3>
+<p>Subjects और chapters</p>
+</div>
+
+<div class="card click" onclick="subjects('Class 3')">
+<div class="icon">3️⃣</div>
+<h3>Class 3</h3>
+<p>Subjects और chapters</p>
+</div>
+
+<div class="card click" onclick="subjects('Class 4')">
+<div class="icon">4️⃣</div>
+<h3>Class 4</h3>
+<p>Subjects और chapters</p>
+</div>
+
+<div class="card click" onclick="subjects('Class 5')">
+<div class="icon">5️⃣</div>
+<h3>Class 5</h3>
+<p>Subjects और chapters</p>
+</div>
+
+</div>
+
+<button class="primary back" onclick="home()">← Home</button>
+
+</section>`;
+}
+
+
+function subjects(cls){
+
+content.innerHTML=`
+
+<section class="hero">
+<div class="logo">📚 ${cls}</div>
+<div class="tag">Subject चुनें</div>
+</section>
+
+<section class="section">
+
+<div class="grid">
+
+<div class="card click" onclick="chapters('${cls}','Maths','📐')">
+<div class="icon">📐</div>
+<h3>Maths</h3>
+<p>गणित के chapters</p>
+</div>
+
+<div class="card click" onclick="chapters('${cls}','Hindi','📖')">
+<div class="icon">📖</div>
+<h3>Hindi</h3>
+<p>हिंदी के chapters</p>
+</div>
+
+<div class="card click" onclick="chapters('${cls}','English','🔤')">
+<div class="icon">🔤</div>
+<h3>English</h3>
+<p>English chapters</p>
+</div>
+
+<div class="card click" onclick="chapters('${cls}','EVS','🌱')">
+<div class="icon">🌱</div>
+<h3>EVS</h3>
+<p>पर्यावरण अध्ययन</p>
+</div>
+
+</div>
+
+<button class="primary back" onclick="primaryClasses()">
+← Class चुनें
+</button>
+
+</section>`;
+}
+
+
+function chapters(cls,sub,icon){
+
+content.innerHTML=`
+
+<section class="hero">
+<div class="logo">${icon} ${sub}</div>
+<div class="tag">${cls} • Chapter list</div>
+</section>
+
+<section class="section">
+
+<div class="card">
+<h3>📚 Chapters</h3>
+<p>Chapter-wise notes और practice यहाँ उपलब्ध होंगे।</p>
+
+<button class="primary"
+onclick="alert('यह chapter अभी demo में है। अगली update में पूरा lesson, notes और MCQ जोड़े जाएंगे।')">
+Chapter 1 खोलें
+</button>
+
+</div>
+
+<button class="primary back" onclick="subjects('${cls}')">
+← Subjects
+</button>
+
+</section>`;
+}
+
+
+function section(title,icon,text){
+
+content.innerHTML=`
+
+<section class="hero">
+<div class="logo">${icon} ${title}</div>
+<div class="tag">आपकी पढ़ाई यहाँ से शुरू होगी</div>
+</section>
+
+<section class="section">
+
+<div class="card">
+<h3>📚 Subjects</h3>
+<p>${text}</p>
+
+<button class="primary"
+onclick="alert('इस section के chapters और notes अगले version में जोड़े जाएंगे।')">
+Chapters खोलें
+</button>
+
+<br>
+
+<button class="primary back" onclick="home()">
+← Home
+</button>
+
+</div>
+
+</section>`;
+}
+
+
+function classes(){
+primaryClasses()
+}
+
+
+function tests(){
+section('Daily Tests','✓','MCQ • Practice • Mock Tests')
+}
+
+
+function tutor(){
+section('AI Tutor','🤖','अपना सवाल पूछें और आसान explanation पाएँ')
+}
+
+
+function profile(){
+section('Student Profile','👤','Progress • Tests • Study history')
+}
+
+
 home();
+
 </script>
 </body>
 </html>
