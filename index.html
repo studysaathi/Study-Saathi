@@ -308,6 +308,88 @@ content.innerHTML=`
 
 
 function chapters(cls,sub,icon){
+let lesson="";
+
+if(sub==="Maths"){
+lesson=`
+<div class="card">
+<h3>📖 Chapter 1: Numbers</h3>
+<p><b>आसान भाषा में:</b> Numbers का उपयोग चीजों को गिनने के लिए किया जाता है।</p>
+
+<h3>🔢 Numbers 1 से 20</h3>
+<p>1, 2, 3, 4, 5, 6, 7, 8, 9, 10</p>
+<p>11, 12, 13, 14, 15, 16, 17, 18, 19, 20</p>
+
+<h3>✏️ Example</h3>
+<p>अगर हमारे पास 🍎🍎🍎 हैं, तो कुल apples = <b>3</b></p>
+
+<h3>📝 Practice</h3>
+<p>1. 1 के बाद कौन-सी संख्या आती है?</p>
+<p>2. 5 के बाद कौन-सी संख्या आती है?</p>
+<p>3. 10 से पहले कौन-सी संख्या आती है?</p>
+
+<h3>✅ MCQ</h3>
+<p><b>Q1. 3 के बाद कौन-सी संख्या आती है?</b></p>
+<button class="primary" onclick="alert('सही उत्तर: 4 ✅')">A) 4</button>
+<button class="primary" onclick="alert('गलत उत्तर ❌')">B) 5</button>
+<button class="primary" onclick="alert('गलत उत्तर ❌')">C) 2</button>
+</div>`;
+}
+else if(sub==="Hindi"){
+lesson=`
+<div class="card">
+<h3>📖 Chapter 1: हिंदी अक्षर</h3>
+<p>हिंदी भाषा में कई अक्षर होते हैं। आज हम कुछ आसान अक्षर सीखेंगे।</p>
+<h3>🔤 स्वर</h3>
+<p>अ, आ, इ, ई, उ, ऊ</p>
+<h3>✏️ Example</h3>
+<p>अ से अनार 🍎</p>
+<p>आ से आम 🥭</p>
+<p>इ से इमली</p>
+<h3>📝 Practice</h3>
+<p>अ से कौन-सा शब्द बनता है?</p>
+<button class="primary" onclick="alert('सही उत्तर: अनार ✅')">अनार</button>
+</div>`;
+}
+else if(sub==="English"){
+lesson=`
+<div class="card">
+<h3>📖 Chapter 1: Alphabet</h3>
+<p>English alphabet में 26 letters होते हैं।</p>
+<h3>🔤 Capital Letters</h3>
+<p>A B C D E F G H I J</p>
+<h3>✏️ Example</h3>
+<p>A for Apple 🍎</p>
+<p>B for Ball ⚽</p>
+<p>C for Cat 🐱</p>
+<h3>📝 Practice</h3>
+<p>A के बाद कौन-सा letter आता है?</p>
+<button class="primary" onclick="alert('सही उत्तर: B ✅')">B</button>
+</div>`;
+}
+else{
+lesson=`
+<div class="card">
+<h3>📖 Chapter 1</h3>
+<p>इस subject का आसान lesson यहाँ पढ़ें।</p>
+<h3>🌱 सीखें</h3>
+<p>अपने आसपास की चीजों को पहचानें और उनके बारे में जानें।</p>
+<h3>📝 Practice</h3>
+<p>Lesson को ध्यान से पढ़कर questions हल करें।</p>
+</div>`;
+}
+
+content.innerHTML=`
+<section class="hero">
+<div class="logo">${icon} ${sub}</div>
+<div class="tag">${cls} • Chapter 1</div>
+</section>
+
+<section class="section">
+${lesson}
+<button class="primary back" onclick="subjects('${cls}')">← Subjects</button>
+</section>`;
+}
 
 content.innerHTML=`
 
